@@ -1,20 +1,22 @@
-export default function HomePage() {
+"use client";
+
+import { useEffect, useState } from "react";
+
+export default function Home() {
+  const [status, setStatus] = useState("Yükleniyor...");
+
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://api.livechatcoach.com"}/health`)
+      .then(res => res.text())
+      .then(data => setStatus(data))
+      .catch(() => setStatus("API bağlantı hatası"));
+  }, []);
+
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#0f172a",
-        color: "#fff",
-        flexDirection: "column",
-        gap: "12px"
-      }}
-    >
+    <main style={{ padding: 40, color: "white" }}>
       <h1>LiveChatCoach</h1>
-      <p>Frontend başarıyla çalışıyor ✅</p>
-      <small>Backend: api.livechatcoach.com</small>
+      <p>Backend Durumu:</p>
+      <pre>{status}</pre>
     </main>
   );
 }
