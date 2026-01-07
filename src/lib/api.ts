@@ -1,21 +1,18 @@
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://api.livechatcoach.com";
+  process.env.NEXT_PUBLIC_API_URL ||
+  "https://api.livechatcoach.com";
 
-export async function apiFetch(
-  path: string,
-  options: RequestInit = {}
-) {
-  const res = await fetch(`${API_URL}${path}`, {
-    ...options,
+export async function sendMessage(message: string) {
+  const res = await fetch(`${API_URL}/api/chat`, {
+    method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {})
+      "Content-Type": "application/json"
     },
-    credentials: "include"
+    body: JSON.stringify({ message })
   });
 
   if (!res.ok) {
-    throw new Error(`API error: ${res.status}`);
+    throw new Error("API error");
   }
 
   return res.json();
