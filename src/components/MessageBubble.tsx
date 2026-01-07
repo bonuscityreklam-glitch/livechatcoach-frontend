@@ -1,25 +1,19 @@
-type Props = {
-  role: "user" | "ai";
-  message: string;
-};
-
-export default function MessageBubble({ role, message }: Props) {
-  const isUser = role === "user";
-
+export default function MessageBubble({
+  role,
+  text
+}: {
+  role: "user" | "assistant";
+  text: string;
+}) {
   return (
     <div
-      style={{
-        alignSelf: isUser ? "flex-end" : "flex-start",
-        background: isUser ? "#2563eb" : "#1f2937",
-        color: "white",
-        padding: "12px 16px",
-        borderRadius: 12,
-        maxWidth: "75%",
-        marginBottom: 10,
-        whiteSpace: "pre-wrap",
-      }}
+      className={`max-w-[70%] px-4 py-2 rounded-lg ${
+        role === "user"
+          ? "ml-auto bg-blue-600 text-white"
+          : "mr-auto bg-gray-200 text-black"
+      }`}
     >
-      {message}
+      {text}
     </div>
   );
 }
