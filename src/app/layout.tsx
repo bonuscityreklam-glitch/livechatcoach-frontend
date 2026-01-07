@@ -1,7 +1,4 @@
-export const metadata = {
-  title: "LiveChatCoach",
-  description: "AI Powered Live Chat Coach"
-};
+import "./globals.css";
 
 export default function RootLayout({
   children,
