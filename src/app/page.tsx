@@ -1,14 +1,9 @@
-import { useEffect } from "react";
-import { apiFetch } from "@/lib/api";
+import ChatBox from "@/components/ChatBox";
 
-export default function Page() {
-  useEffect(() => {
-    apiFetch("/api/health")
-      .then((res) => {
-        console.log("HEALTH:", res);
-      })
-      .catch(console.error);
-  }, []);
-
-  return <div>Frontend çalışıyor</div>;
+export default function HomePage() {
+  return (
+    <main className="h-screen w-screen flex">
+      <ChatBox />
+    </main>
+  );
 }
